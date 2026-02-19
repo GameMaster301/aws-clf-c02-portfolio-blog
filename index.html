@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My AWS CLF-C02 Portfolio</title>
+  <style>body{font-family:sans-serif;text-align:center;padding:20px;} h1{color:#FF9900;}</style>
+</head>
+<body>
+  <h1>Hello from my AWS Serverless Blog!</h1>
+  <p>CLF-C02 learning project – February 2026</p>
+  <p>Features: Static hosting (Amplify/S3/CloudFront), serverless comments, auth, monitoring.</p>
+
+  <h2>Leave a Comment</h2>
+  <form id="commentForm">
+    <input type="text" id="comment" placeholder="Your comment..." required>
+    <button type="submit">Submit</button>
+  </form>
+  <h3>Comments:</h3>
+  <div id="commentsList"></div>
+
+  <script>
+    const apiUrl = 'YOUR_API_GATEWAY_URL_HERE/comments';  // Replace later
+
+    // Load comments
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('commentsList').innerHTML = data.map(c => `<p>${c.comment}</p>`).join('');
+      })
+      .catch(err => console.error(err));
+
+    // Submit comment
+    document.getElementById('commentForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const comment = document.getElementById('comment').value;
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ comment })
+      })
+      .then(() => {
+        alert('Comment added!');
+        location.reload();  // Simple refresh
+      })
+      .catch(err => alert('Error: ' + err));
+    });
+  </script>
+</body>
+</html>
