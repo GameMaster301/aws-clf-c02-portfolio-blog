@@ -22,7 +22,7 @@
     const apiUrl = 'https://if472ycln2.execute-api.eu-central-1.amazonaws.com/prod/comments';  // Replace later
 
     // Load comments
-    fetch(https:if472ycln2.execute-api.eu-central-1.amazonaws.com/prod)
+    fetch(https://if472ycln2.execute-api.eu-central-1.amazonaws.com/prod)
       .then(res => res.json())
       .then(data => {
         document.getElementById('commentsList').innerHTML = data.map(c => `<p>${c.comment}</p>`).join('');
@@ -48,6 +48,7 @@
 </body>
 
 </html>
+
 
 
 
